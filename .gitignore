@@ -1,0 +1,47 @@
+﻿# Ignorar diretórios de build do .NET
+src/**/bin/
+src/**/obj/
+src/**/out/
+
+# Ignorar arquivos relacionados à publicação
+src/**/publish/
+src/**/*.publishsettings
+
+# Ignorar pacotes externos
+src/**/packages/
+src/**/node_modules/
+
+# IDE-specific files
+.vs/
+.idea/
+.Rider*/  # Rider configurations
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Arquivos de logs e cache
+src/**/*.log
+src/**/*.tmp
+src/**/*.cache
+
+# Secrets e arquivos de ambiente
+src/**/secrets.json
+src/**/.env
+src/**/.env.*
+
+# Arquivos gerados automaticamente pelo compilador
+src/**/*.g.i.cs
+src/**/*.g.cs
+
+# Backups e arquivos temporários
+*.bak
+*.swp
+*.orig
+*.tmp
+
+# Arquivos de banco de dados local
+src/**/*.mdf
+src/**/*.ldf
+src/**/*.sqlite
+src/**/*.db

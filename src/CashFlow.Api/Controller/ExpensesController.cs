@@ -23,11 +23,21 @@ public class ExpensesController : ControllerBase
         }
         catch (ArgumentException e)
         {
-            return BadRequest(e.Message);
+            var errorMessage = new ResponseErrorJson
+            {
+                ErrorMessage = e.Message
+            };
+            
+            return BadRequest(errorMessage);
         }
         catch
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Unknown error");
+            var errorMessage = new ResponseErrorJson
+            {
+                ErrorMessage = "Unknown error"
+            };
+
+            return StatusCode(StatusCodes.Status500InternalServerError, errorMessage);
         }
     }
 }

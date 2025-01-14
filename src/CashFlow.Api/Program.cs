@@ -1,3 +1,5 @@
+using CashFlow.Api.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Adicione os serviços ao contêiner:
@@ -7,6 +9,8 @@ builder.Services.AddControllers();
 // Registra o Swagger no contêiner de serviços
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 var app = builder.Build();
 

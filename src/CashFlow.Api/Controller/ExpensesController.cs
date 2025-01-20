@@ -11,9 +11,9 @@ public class ExpensesController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterExpenseJson), 201)]
-    public IActionResult Register([FromServices] IRegisterExpenseUseCase registerExpenseUseCase, [FromBody] RequestRegisterExpenseJson request)
+    public async Task<IActionResult> Register([FromServices] IRegisterExpenseUseCase registerExpenseUseCase, [FromBody] RequestRegisterExpenseJson request)
     {
-        var response = registerExpenseUseCase.Execute(request);
+        var response = await registerExpenseUseCase.Execute(request);
         return Created(string.Empty, response);
     }
 }

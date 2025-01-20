@@ -10,7 +10,8 @@ namespace CashFlow.Api.Controller;
 public class ExpensesController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisterExpenseJson), 201)]
+    [ProducesResponseType(typeof(ResponseRegisterExpenseJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register([FromServices] IRegisterExpenseUseCase registerExpenseUseCase, [FromBody] RequestRegisterExpenseJson request)
     {
         var response = await registerExpenseUseCase.Execute(request);

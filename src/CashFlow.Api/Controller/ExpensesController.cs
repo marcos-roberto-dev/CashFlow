@@ -12,9 +12,9 @@ public class ExpensesController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterExpenseJson), 201)]
-    public IActionResult Register([FromBody] RequestRegisterExpenseJson request)
+    public IActionResult Register([FromServices] IRegisterExpenseUseCase registerExpenseUseCase, [FromBody] RequestRegisterExpenseJson request)
     {
-        var response = new RegisterExpenseUseCase().Execute(request);
+        var response = registerExpenseUseCase.Execute(request);
         return Created(string.Empty, response);
     }
 }

@@ -13,6 +13,6 @@ internal class ExpensesRepository(CashFlowDbContext dbContext) : IExpensesReposi
 
     public async Task<List<Expense>> GetAll()
     {
-        return await dbContext.Expenses.ToListAsync();
+        return await dbContext.Expenses.AsNoTracking().ToListAsync();
     }
 }

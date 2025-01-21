@@ -6,10 +6,11 @@ public class CultureMiddleware(RequestDelegate next)
 {
     public async Task Invoke(HttpContext context)
     {
+        var languageDefault = "en";
         var supportedLanguages = CultureInfo.GetCultures(CultureTypes.AllCultures).ToList();
         var requestedCulture = context.Request.Headers.AcceptLanguage.FirstOrDefault();
         
-        var cultureInfo = new CultureInfo("en");
+        var cultureInfo = new CultureInfo(languageDefault);
         var isNotNullOrWhiteSpaceRequestedCulture = string.IsNullOrWhiteSpace(requestedCulture) == false;
         
         if (isNotNullOrWhiteSpaceRequestedCulture && 

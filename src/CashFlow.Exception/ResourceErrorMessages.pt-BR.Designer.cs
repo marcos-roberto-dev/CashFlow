@@ -69,6 +69,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Despesa não encontrada..
+        /// </summary>
+        internal static string EXPENSE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("EXPENSE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A data tem que ser menor ou igual a data atual.
         /// </summary>
         internal static string EXPENSES_CANNOT_FOR_THE_FUTURE {

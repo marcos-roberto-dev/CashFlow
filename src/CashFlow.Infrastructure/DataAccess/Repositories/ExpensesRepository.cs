@@ -20,4 +20,18 @@ internal class ExpensesRepository(CashFlowDbContext dbContext) : IExpenseReadOnl
     {
         return await dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(expense => expense.Id == id);
     }
+
+    public async Task<bool> Delete(long id)
+    {
+        var result = await dbContext.Expenses.FirstOrDefaultAsync(expense => expense.Id == id);
+
+        if (result is null)
+        {
+            return false;
+        }
+
+        dbContext.Expenses.Remove(result);
+        
+        return true;
+    }
 }

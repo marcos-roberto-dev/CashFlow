@@ -24,7 +24,6 @@ public class ExpensesController : ControllerBase
     
     [HttpGet]
     [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Get([FromServices] IGetAllExpensesUseCase getExpensesUseCase)
     {
         var response = await getExpensesUseCase.Execute();
@@ -34,7 +33,7 @@ public class ExpensesController : ControllerBase
             return Ok(response);
         }
 
-        return NoContent();
+        return Ok(response);
     }
     
     [HttpGet]

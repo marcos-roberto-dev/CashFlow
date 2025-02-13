@@ -26,4 +26,16 @@
     <data name="TITLE" xml:space="preserve">
         <value>Titulo</value>
     </data>
+    <data name="PAYMENT_TYPE_CASH" xml:space="preserve">
+        <value>Dinheiro</value>
+    </data>
+    <data name="PAYMENT_TYPE_CREDIT_CARD" xml:space="preserve">
+        <value>Cartão de Credito</value>
+    </data>
+    <data name="PAYMENT_TYPE_DEBIT_CARD" xml:space="preserve">
+        <value>Cartão de Debito</value>
+    </data>
+    <data name="PAYMENT_TYPE_ELETRONIC_TRANSFER" xml:space="preserve">
+        <value>Transferencia Bancaria</value>
+    </data>
 </root>

@@ -1,14 +1,23 @@
+using CashFlow.Application.UseCases.Expenses.Register.Reports;
+using CashFlow.Domain.Enums;
 using CashFlow.Domain.Reports;
+using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
-namespace CashFlow.Application.UseCases.Expenses.Register.Reports;
+namespace CashFlow.Application.UseCases.Expenses.Reports;
 
-public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
+public class GenerateExpensesReportExcelUseCase(IExpenseReadOnlyRepository repository) : IGenerateExpensesReportExcelUseCase
 {
-    public Task<byte[]> Execute(DateOnly month)
+    private const string CURRENCY_SYMBOL = "$";
+    public async Task<byte[]> Execute(DateOnly month)
     {
-        var workbook = new XLWorkbook();
+        var expenses = await repository.FilterByMonth(month);
+        if(expenses.Count == 0)
+        {
+            return [];
+        }
+        
+        using var workbook = new XLWorkbook();
         workbook.Author = "CashFlow";
         workbook.Style.Font.FontSize = 12;
         workbook.Style.Font.FontName = "Times New Roman";
@@ -17,11 +26,27 @@ public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUs
 
         InsertHeader(worksheet);
 
+        var raw = 2;
+        foreach (var expense in expenses)
+        {
+            worksheet.Cell($"A{raw}").Value = expense.Title;
+            worksheet.Cell($"B{raw}").Value = expense.Date;
+            worksheet.Cell($"C{raw}").Value = ConvertPaymentType(expense.PaymentType);
+            
+            worksheet.Cell($"D{raw}").Value = expense.Amount;
+            worksheet.Cell($"D{raw}").Style.NumberFormat.Format = $"-{CURRENCY_SYMBOL}#,##0.00";
+                
+            worksheet.Cell($"E{raw}").Value = expense.Description;
+            raw++;
+        }
+
+        worksheet.Columns().AdjustToContents();
+
         var file = new MemoryStream();
         
         workbook.SaveAs(file);
 
-        return Task.FromResult(file.ToArray());
+        return file.ToArray();
     }
 
     private void InsertHeader(IXLWorksheet worksheet)
@@ -40,5 +65,17 @@ public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUs
         worksheet.Cell("C1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         worksheet.Cell("E1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         worksheet.Cell("D1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+    }
+
+    private string ConvertPaymentType(PaymentType payment)
+    {
+        return payment switch
+        {
+            PaymentType.Cash => ResourceReportGenerationMessages.PAYMENT_TYPE_CASH,
+            PaymentType.CreditCard => ResourceReportGenerationMessages.PAYMENT_TYPE_CREDIT_CARD,
+            PaymentType.DebitCard => ResourceReportGenerationMessages.PAYMENT_TYPE_DEBIT_CARD,
+            PaymentType.EletronicTransfer => ResourceReportGenerationMessages.PAYMENT_TYPE_ELETRONIC_TRANSFER,
+            _ => string.Empty
+        };
     }
 }

@@ -19,4 +19,13 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\Expenses\Reports\Pdf\Fonts\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\Fonts\Raleway-Black.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\Raleway-Regular.ttf" />
+    </ItemGroup>
+
 </Project>

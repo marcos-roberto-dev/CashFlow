@@ -1,10 +1,9 @@
-using CashFlow.Application.UseCases.Expenses.Register.Reports;
 using CashFlow.Domain.Enums;
 using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
 
-namespace CashFlow.Application.UseCases.Expenses.Reports;
+namespace CashFlow.Application.UseCases.Expenses.Reports.Excel;
 
 public class GenerateExpensesReportExcelUseCase(IExpenseReadOnlyRepository repository) : IGenerateExpensesReportExcelUseCase
 {

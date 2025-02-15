@@ -45,3 +45,9 @@ src/**/*.mdf
 src/**/*.ldf
 src/**/*.sqlite
 src/**/*.db
+
+src/**/bin/
+src/**/obj/
+
+tests/**/bin/
+tests/**/obj/

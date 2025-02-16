@@ -12,6 +12,6 @@ public class ExpensesReportFontResolver : IFontResolver
 
     public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
     {
-        throw new NotImplementedException();
+        return new FontResolverInfo(familyName);
     }
 }

@@ -21,8 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\worksans-Black.ttf" />
-      <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\worksans-Regular.ttf" />
+      <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Worksans-Black.ttf" />
+      <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Worksans-Regular.ttf" />
       <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Black.ttf" />
       <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
     </ItemGroup>
